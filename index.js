@@ -9,14 +9,26 @@ const addActive = document.querySelectorAll('.section');
 theForm.addEventListener('submit', () => {
   const newBook = new Book(bookTitle.value, bookAuthor.value);
   newBook.addBook();
+  Book.displayUI();
+
 });
 
 Book.displayUI();
+
 const removeButton = document.querySelectorAll('.remove-btn');
-removeButton.forEach((item) => item.addEventListener('click', function () {
-  const deleteBook = new Book(bookTitle.value, bookAuthor.value, this.id);
-  deleteBook.removeBook();
-}));
+// removeButton.forEach((item) => item.addEventListener('click', () => {
+//   const deleteBook = new Book(bookTitle.value, bookAuthor.value, this.id);
+//   deleteBook.removeBook();
+// }));
+
+for (let index = 0; index < removeButton.length; index++) {
+  const element = removeButton[index];
+  element.addEventListener('click', () => {
+      const deleteBook = new Book(bookTitle.value, bookAuthor.value, index);
+      deleteBook.removeBook();
+    })
+  
+}
 
 listBtn.forEach((btn, i) => {
   btn.onclick = () => {
